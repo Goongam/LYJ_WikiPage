@@ -14,5 +14,10 @@ export default async function WikiPage({ params }: Props) {
 
   if (!article) notFound();
 
-  return <></>;
+  return (
+    <section>
+      <h1>{article.title}</h1>
+      <div>{article.title}</div>
+    </section>
+  );
 }
