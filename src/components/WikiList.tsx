@@ -5,7 +5,7 @@ export default async function WikiList() {
   const articles = await getAllArticles();
 
   return (
-    <section>
+    <section className="flex flex-col gap-2">
       {articles.map(({ title }) => (
         <WikiListTitle title={title} key={title} />
       ))}
