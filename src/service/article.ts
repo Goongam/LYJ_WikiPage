@@ -1,3 +1,4 @@
+import { PAGE_SHOW_COUNT } from "@/constants";
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
 import { cache } from "react";
@@ -13,11 +14,20 @@ export const getAllArticles = cache(async () => {
   return readFile(filePath, "utf-8").then<Article[]>(JSON.parse);
 });
 
+export const getArticles = cache(async (page: number) => {
+  const articles = await getAllArticles();
+
+  return articles.slice((page - 1) * PAGE_SHOW_COUNT, page * PAGE_SHOW_COUNT);
+});
+
+export const getArticlesCount = cache(async () => {
+  const articles = await getAllArticles();
+
+  return articles.length;
+});
+
 export const getArticle = cache(async (title: string) => {
-  const filePath = path.join(process.cwd(), "src/data", "articles.json");
-  const articles = await readFile(filePath, "utf-8").then<Article[]>(
-    JSON.parse
-  );
+  const articles = await getAllArticles();
 
   return articles.find((article) => article.title === title);
 });
