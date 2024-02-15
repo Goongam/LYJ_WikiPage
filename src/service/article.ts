@@ -13,6 +13,15 @@ export const getAllArticles = cache(async () => {
   return readFile(filePath, "utf-8").then<Article[]>(JSON.parse);
 });
 
+export const getArticle = cache(async (title: string) => {
+  const filePath = path.join(process.cwd(), "src/data", "articles.json");
+  const articles = await readFile(filePath, "utf-8").then<Article[]>(
+    JSON.parse
+  );
+
+  return articles.find((article) => article.title === title);
+});
+
 export const addArticle = async (newArticle: Article) => {
   const filePath = path.join(process.cwd(), "src/data", "articles.json");
 
