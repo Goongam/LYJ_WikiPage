@@ -1,6 +1,10 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
-// 글 추가, 수정 시 input의 값과 에러 상태를 관리하기 위한 훅
+/**
+ * 글 추가, 수정 시 input의 값과 에러 상태를 관리하기 위한 훅
+ * @param initValue
+ *
+ */
 export function useInput(initValue: string) {
   const [value, setValue] = useState(initValue);
   const [error, setError] = useState(false);
@@ -13,6 +17,10 @@ export function useInput(initValue: string) {
   const showError = (text?: string) => {
     setError(true);
   };
+
+  useEffect(() => {
+    setValue(initValue);
+  }, [initValue]);
 
   return { value, onchange, error, showError };
 }
