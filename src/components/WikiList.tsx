@@ -13,11 +13,13 @@ export default async function WikiList({ page = 1 }: Props) {
   const articles = await getArticles(page);
   const maxPage = Math.ceil((await getArticlesCount()) / PAGE_SHOW_COUNT);
   return (
-    <section className="flex flex-col gap-2">
+    <section className="flex flex-col gap-2 h-full">
       {articles.map(({ title }) => (
         <WikiListTitle title={title} key={title} />
       ))}
-      <PageNation maxPage={maxPage} showPage={5} currentPage={page} />
+      <div className="mt-auto">
+        <PageNation maxPage={maxPage} showPage={5} currentPage={page} />
+      </div>
     </section>
   );
 }
