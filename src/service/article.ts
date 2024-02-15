@@ -4,7 +4,7 @@ import { cache } from "react";
 
 interface Article {
   title: string;
-  description: string;
+  content: string;
   date: Date;
 }
 
