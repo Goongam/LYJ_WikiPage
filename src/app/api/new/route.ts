@@ -18,13 +18,11 @@ export async function POST(req: NextRequest) {
     date: new Date(),
   };
 
-  addArticle(newArticle)
+  return addArticle(newArticle)
     .then(() => {
-      NextResponse.json("성공적으로 추가되었습니다", { status: 200 });
+      return NextResponse.json("성공적으로 추가되었습니다", { status: 200 });
     })
     .catch(() => {
-      NextResponse.json("추가하는데 실패하였습니다", { status: 400 });
+      return NextResponse.json("추가하는데 실패하였습니다", { status: 400 });
     });
-
-  return;
 }
