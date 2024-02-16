@@ -13,7 +13,13 @@ export interface Article {
  */
 export const getAllArticles = async () => {
   const filePath = path.join(process.cwd(), "src/data", "articles.json");
-  return readFile(filePath, "utf-8").then<Article[]>(JSON.parse);
+  return readFile(filePath, "utf-8")
+    .then<Article[]>(JSON.parse)
+    .then((data) =>
+      data.sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+      )
+    );
 };
 
 /**
