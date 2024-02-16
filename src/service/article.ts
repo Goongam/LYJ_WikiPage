@@ -71,6 +71,10 @@ export const addArticle = async (newArticle: Article) => {
 
     // 파일에 새로운 데이터 작성
     await writeFile(filePath, updatedData, "utf-8");
+
+    // test
+    const test = await readFile(filePath, "utf-8").then<Article[]>(JSON.parse);
+    console.log(test);
   } catch (error) {
     console.error("글 추가 에러:", error);
   }
