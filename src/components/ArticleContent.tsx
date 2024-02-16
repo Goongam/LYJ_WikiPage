@@ -15,5 +15,5 @@ export default function ArticleContent({ allTitles, title, content }: Props) {
     content,
   ]);
 
-  return <div className="mt-5 whitespace-pre-wrap">{contentWithLinks2}</div>;
+  return <p className="mt-5 whitespace-pre-wrap">{contentWithLinks2}</p>;
 }
