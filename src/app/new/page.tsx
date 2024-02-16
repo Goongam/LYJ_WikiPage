@@ -1,5 +1,4 @@
 import AddArticle from "@/components/AddArticle";
-import { Article } from "@/service/article";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

@@ -1,10 +1,10 @@
 "use client";
 import { useMutate } from "@/hooks/useFetch";
 import { useInput } from "@/hooks/useInput";
-import { Article, addArticle } from "@/service/article";
+import { Article } from "@/service/article";
 import { validArticle } from "@/validations/newArticle";
-import { redirect, useRouter } from "next/navigation";
-import { FormEvent, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { FormEvent } from "react";
 import UpdateButton from "./ui/UpdateButton";
 import Uploading from "./ui/Uploading";
 

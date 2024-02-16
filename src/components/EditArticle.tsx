@@ -2,7 +2,6 @@
 
 import UpdateArticleForm from "./UpdateArticleForm";
 import { useArticle } from "@/hooks/useArticle";
-import SkeletonWikiPage from "./ui/skeleton/SkeletonWikiPage";
 import SkeletonUpdatePage from "./ui/skeleton/SkeletonUpdatePage";
 
 interface Props {

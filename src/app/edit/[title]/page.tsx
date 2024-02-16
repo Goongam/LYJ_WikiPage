@@ -1,5 +1,5 @@
 import EditArticle from "@/components/EditArticle";
-import { Metadata } from "next";
+
 interface Props {
   params: { title: string };
 }

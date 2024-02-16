@@ -1,8 +1,6 @@
 import { PAGE_SHOW_COUNT } from "@/constants";
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
-import { cache } from "react";
-
 export interface Article {
   title: string;
   content: string;

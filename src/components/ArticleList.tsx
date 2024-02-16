@@ -1,8 +1,4 @@
-import {
-  getAllArticles,
-  getArticles,
-  getArticlesCount,
-} from "@/service/article";
+import { getArticles, getArticlesCount } from "@/service/article";
 import ArticleListTitle from "./ArticleListTitle";
 import PageNation from "./ui/PageNation";
 import { PAGE_SHOW_COUNT } from "@/constants";

@@ -1,7 +1,4 @@
-import Link from "next/link";
 import { ReactNode } from "react";
-import AutoLink from "./ui/AutoLink";
-import { translateLink } from "@/validations/translateLink";
 import { makeLink } from "@/utils/makeLink";
 
 interface Props {
