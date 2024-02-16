@@ -5,15 +5,19 @@ import Link from "next/link";
 import { ReactNode, useEffect, useState } from "react";
 import ArticleContent from "./ArticleContent";
 import { useArticle } from "@/hooks/useArticle";
+import { notFound } from "next/navigation";
+import SkeletonElement from "./ui/skeleton/SkeletonElement";
+import SkeletonWikiPage from "./ui/skeleton/SkeletonWikiPage";
 
 interface Props {
   title: string;
 }
 
 export default function Article({ title }: Props) {
-  const { allTitles, article } = useArticle(title);
+  const { allTitles, article, isError } = useArticle(title);
 
-  if (!article) return <>loading...</>;
+  if (isError) notFound();
+  if (!article) return <SkeletonWikiPage />;
 
   return (
     <section className="p-5 flex-1 min-h-screen">
