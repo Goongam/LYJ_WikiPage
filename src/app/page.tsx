@@ -1,4 +1,4 @@
-import WikiList from "@/components/WikiList";
+import ArticleList from "@/components/ArticleList";
 
 interface Props {
   params: { slug: string };
@@ -14,7 +14,7 @@ export default function Home({ searchParams }: Props) {
         <h2 className="text-5xl font-extrabold">코딩위키</h2>
         <p className="mt-2">우리 모두가 만들어가는 자유 백과사전</p>
       </div>
-      <WikiList page={isNaN(page) ? 1 : page} />
+      <ArticleList page={isNaN(page) ? 1 : page} />
     </div>
   );
 }

@@ -3,7 +3,7 @@ import Link from "next/link";
 interface Props {
   title: string;
 }
-export default function WikiListTitle({ title }: Props) {
+export default function ArticleListTitle({ title }: Props) {
   return (
     <Link
       href={`/wiki/${title}`}
