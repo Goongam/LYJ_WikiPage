@@ -11,6 +11,8 @@ interface Props {
 export default function Article({ title }: Props) {
   const [article, setArticle] = useState<SimpleArticle>();
   const [allTitles, setAllTitle] = useState<string[]>([]);
+
+  // TODO: 분리 및 로딩, 에러state추가
   useEffect(() => {
     fetch(`/api/article/${title}`)
       .then((res) => {
@@ -31,7 +33,7 @@ export default function Article({ title }: Props) {
   const contentWithLinks2: ReactNode[] = allTitles.reduce(
     (accContent: ReactNode[], findTitle) => {
       const titleRegex = new RegExp(`(${findTitle})`, "g");
-      return accContent.flatMap((part, index) => {
+      const flatmap = accContent.flatMap((part, index) => {
         if (typeof part !== "string") return part;
         return part.split(titleRegex).map((segment, index2) => {
           //위키 제목이 일치하며, 현재페이지의 위키가 아닌 단어
@@ -49,6 +51,9 @@ export default function Article({ title }: Props) {
           return segment;
         });
       });
+      // console.log(flatmap);
+
+      return flatmap;
     },
     [article.content]
   );
@@ -59,7 +64,7 @@ export default function Article({ title }: Props) {
         <h1 className="font-bold text-3xl">{title}</h1>
         <Link href={`/edit/${title}`}>수정</Link>
       </div>
-      <div className="mt-5">{contentWithLinks2}</div>
+      <div className="mt-5 whitespace-pre-wrap">{contentWithLinks2}</div>
     </section>
   );
 }
