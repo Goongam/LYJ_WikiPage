@@ -3,15 +3,17 @@ import Article from "@/components/Article";
 interface Props {
   params: { title: string };
 }
+export async function generateMetadata({ params }: Props) {
+  const { title } = params;
+  return {
+    title: `${decodeURIComponent(title)}`,
+  };
+}
 
 export default async function WikiPage({ params }: Props) {
   const { title: currentTitle } = params;
 
   const decodeTitle = decodeURIComponent(currentTitle);
 
-  return (
-    <section className="p-5">
-      <Article title={decodeTitle} />
-    </section>
-  );
+  return <Article title={decodeTitle} />;
 }
