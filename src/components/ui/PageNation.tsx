@@ -6,8 +6,8 @@ interface Props {
   currentPage?: number;
 }
 export default function PageNation({
-  showPage,
   maxPage,
+  showPage,
   currentPage = 1,
 }: Props) {
   if (currentPage <= 0 || currentPage > maxPage) return <></>;
@@ -21,7 +21,7 @@ export default function PageNation({
 
   const prevPage = page[0] - 1 <= 0 ? null : page[0] - 1;
   const nextPage =
-    page[page.length - 1] + 1 >= maxPage ? null : page[page.length - 1] + 1;
+    page[page.length - 1] + 1 <= maxPage ? page[page.length - 1] + 1 : null;
 
   return (
     <div className="w-full my-5 flex gap-2 justify-center text-2xl">
