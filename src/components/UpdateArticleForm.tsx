@@ -14,12 +14,14 @@ interface Props {
   type: UploadType;
   submit: (title: string, content: string) => Promise<Response>;
   initData?: Omit<Article, "date">;
+  initLoading?: boolean;
 }
 
 export default function UpdateArticleForm({
   type,
   submit,
   initData = { title: "", content: "" },
+  initLoading,
 }: Props) {
   const {
     value: titleValue,
@@ -79,11 +81,12 @@ export default function UpdateArticleForm({
           value={contentValue}
           onChange={contentChange}
           placeholder="내용을 입력하세요"
+          disabled={initLoading}
           className={`${
             contentError && "border border-red-500"
           } outline-none flex-1 resize-none border p-2 rounded-md`}
         />
-        <UpdateButton type={type} />
+        <UpdateButton type={type} loading={initLoading} />
       </form>
       <Uploading loading={loading} />
     </section>

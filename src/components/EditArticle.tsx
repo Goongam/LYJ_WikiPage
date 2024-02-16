@@ -2,7 +2,6 @@
 
 import UpdateArticleForm from "./UpdateArticleForm";
 import { useArticle } from "@/hooks/useArticle";
-import SkeletonUpdatePage from "./ui/skeleton/SkeletonUpdatePage";
 
 interface Props {
   title: string;
@@ -19,9 +18,14 @@ export default function EditArticle({ title }: Props) {
       }),
     });
 
-  if (isLoading || !article) return <SkeletonUpdatePage />;
+  const loading = isLoading || !article;
 
   return (
-    <UpdateArticleForm submit={editArticle} type="edit" initData={article} />
+    <UpdateArticleForm
+      submit={editArticle}
+      type="edit"
+      initData={article}
+      initLoading={loading}
+    />
   );
 }

@@ -1,13 +1,11 @@
 "use client";
 
-import { SimpleArticle } from "@/types/article";
 import Link from "next/link";
-import { ReactNode, useEffect, useState } from "react";
+
 import ArticleContent from "./ArticleContent";
 import { useArticle } from "@/hooks/useArticle";
 import { notFound } from "next/navigation";
-import SkeletonElement from "./ui/skeleton/SkeletonElement";
-import SkeletonWikiPage from "./ui/skeleton/SkeletonWikiPage";
+import ArticleLoading from "./ui/ArticleLoading";
 
 interface Props {
   title: string;
@@ -17,7 +15,7 @@ export default function Article({ title }: Props) {
   const { allTitles, article, isError } = useArticle(title);
 
   if (isError) notFound();
-  if (!article) return <SkeletonWikiPage />;
+  if (!article) return <ArticleLoading />;
 
   return (
     <section className="p-5 flex-1 min-h-screen">
