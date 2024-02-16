@@ -1,8 +1,13 @@
 "use client";
 
+import { Article } from "@/service/article";
 import UpdateArticleForm from "./UpdateArticleForm";
 
-export default function AddArticle() {
+interface Props {
+  initData?: Omit<Article, "date">;
+}
+
+export default function AddArticle({ initData }: Props) {
   const newArticle = (title: string, content: string) =>
     fetch("/api/new", {
       method: "POST",
@@ -12,5 +17,7 @@ export default function AddArticle() {
       }),
     });
 
-  return <UpdateArticleForm submit={newArticle} type="new" />;
+  return (
+    <UpdateArticleForm submit={newArticle} type="new" initData={initData} />
+  );
 }

@@ -1,4 +1,5 @@
 import AddArticle from "@/components/AddArticle";
+import { Article } from "@/service/article";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,6 +7,19 @@ export const metadata: Metadata = {
   description: "새로운 글을 추가합니다",
 };
 
-export default function NewArticlePage() {
-  return <AddArticle />;
+interface Props {
+  params: { slug: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
+
+export default function NewArticlePage({ searchParams }: Props) {
+  const title = searchParams?.init as string;
+
+  const initData = title
+    ? {
+        content: "",
+        title,
+      }
+    : undefined;
+  return <AddArticle initData={initData} />;
 }
