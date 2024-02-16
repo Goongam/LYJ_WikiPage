@@ -1,3 +1,5 @@
+import { ERROR_TEXT } from "@/constants";
+import { ErrorType } from "@/types/article";
 import { useState } from "react";
 
 /**
@@ -10,7 +12,7 @@ export function useMutate(
   fetchFn: () => Promise<Response>,
   { onSuccess }: { onSuccess?: () => void }
 ) {
-  const [serverError, setServerError] = useState("");
+  const [serverError, setServerError] = useState<ErrorType>({ error: false });
   const [loading, setLoding] = useState(false);
 
   const mutate = () => {
@@ -20,7 +22,12 @@ export function useMutate(
         if (res.status === 200) {
           // 성공시
           if (onSuccess) onSuccess();
-        } else setServerError(await res.text()); //실패시(에러)
+        } else {
+          setServerError({
+            error: true,
+            message: ERROR_TEXT,
+          }); //실패시(에러)
+        }
       })
       .finally(() => {
         setLoding(false);

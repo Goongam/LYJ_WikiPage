@@ -58,9 +58,9 @@ export default function UpdateArticleForm({
 
   return (
     <section className="w-full h-full flex flex-col items-center justify-center p-2 gap-2">
-      {serverError && (
+      {serverError.error && (
         <p className="w-full text-center h-20 flex items-center justify-center bg-red-400 rounded-md text-white font-bold max-w-screen-md">
-          {serverError}
+          {serverError.message}
         </p>
       )}
       <form
