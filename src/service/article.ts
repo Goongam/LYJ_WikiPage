@@ -44,8 +44,6 @@ export const getArticlesCount = async () => {
 export const getArticle = async (title: string) => {
   const articles = await getAllArticles();
 
-  console.log(articles.find((article) => article.title === title));
-
   return articles.find((article) => article.title === title);
 };
 
