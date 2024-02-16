@@ -4,27 +4,14 @@ import { SimpleArticle } from "@/types/article";
 import Link from "next/link";
 import { ReactNode, useEffect, useState } from "react";
 import ArticleContent from "./ArticleContent";
+import { useArticle } from "@/hooks/useArticle";
 
 interface Props {
   title: string;
 }
 
 export default function Article({ title }: Props) {
-  const [article, setArticle] = useState<SimpleArticle>();
-  const [allTitles, setAllTitle] = useState<string[]>([]);
-
-  // TODO: 분리 및 로딩, 에러state추가
-  useEffect(() => {
-    fetch(`/api/article/${title}`)
-      .then((res) => {
-        if (res.status === 200) return res.json();
-        if (res.status === 404) console.log("404");
-      })
-      .then((data) => {
-        setArticle(data.article);
-        setAllTitle(data.allArticles);
-      });
-  }, [title]);
+  const { allTitles, article } = useArticle(title);
 
   if (!article) return <>loading...</>;
 

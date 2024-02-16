@@ -1,15 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import UpdateArticleForm from "./UpdateArticleForm";
-import { Article } from "@/service/article";
-import { SimpleArticle } from "@/types/article";
+import { useArticle } from "@/hooks/useArticle";
 
 interface Props {
   title: string;
 }
 export default function EditArticle({ title }: Props) {
-  const [article, setArticle] = useState<SimpleArticle>();
+  const { article, isLoading } = useArticle(title);
+
   const editArticle = (title: string, content: string) =>
     fetch("/api/edit", {
       method: "POST",
@@ -19,11 +18,8 @@ export default function EditArticle({ title }: Props) {
       }),
     });
 
-  useEffect(() => {
-    fetch(`/api/article/${title}`)
-      .then((res) => res.json())
-      .then((data) => setArticle(data.article));
-  }, [title]);
+  if (isLoading) return <>loading...</>;
+
   return (
     <UpdateArticleForm submit={editArticle} type="edit" initData={article} />
   );
