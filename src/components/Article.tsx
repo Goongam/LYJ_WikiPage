@@ -3,6 +3,7 @@
 import { SimpleArticle } from "@/types/article";
 import Link from "next/link";
 import { ReactNode, useEffect, useState } from "react";
+import ArticleContent from "./ArticleContent";
 
 interface Props {
   title: string;
@@ -27,44 +28,17 @@ export default function Article({ title }: Props) {
 
   if (!article) return <>loading...</>;
 
-  // 1. 위키 타이틀 목록 가져오기
-  // 2. 긴 순서로 정렬
-  // 3. 정규화를 통한 Link로 변환
-  const contentWithLinks2: ReactNode[] = allTitles.reduce(
-    (accContent: ReactNode[], findTitle) => {
-      const titleRegex = new RegExp(`(${findTitle})`, "g");
-      const flatmap = accContent.flatMap((part, index) => {
-        if (typeof part !== "string") return part;
-        return part.split(titleRegex).map((segment, index2) => {
-          //위키 제목이 일치하며, 현재페이지의 위키가 아닌 단어
-          if (segment === findTitle && segment !== title) {
-            return (
-              <Link
-                key={`${index}-${findTitle}-${index2}`}
-                href={`/wiki/${encodeURIComponent(findTitle)}`}
-                className="text-blue-500 hover:underline"
-              >
-                {findTitle}
-              </Link>
-            );
-          }
-          return segment;
-        });
-      });
-      // console.log(flatmap);
-
-      return flatmap;
-    },
-    [article.content]
-  );
-
   return (
     <section>
       <div className="flex items-center justify-between">
         <h1 className="font-bold text-3xl">{title}</h1>
         <Link href={`/edit/${title}`}>수정</Link>
       </div>
-      <div className="mt-5 whitespace-pre-wrap">{contentWithLinks2}</div>
+      <ArticleContent
+        allTitles={allTitles}
+        content={article.content}
+        title={title}
+      />
     </section>
   );
 }
