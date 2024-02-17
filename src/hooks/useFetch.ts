@@ -25,9 +25,15 @@ export function useMutate(
         } else {
           setServerError({
             error: true,
-            message: ERROR_TEXT,
+            message: await res.text(),
           }); //실패시(에러)
         }
+      })
+      .catch(() => {
+        setServerError({
+          error: true,
+          message: ERROR_TEXT,
+        });
       })
       .finally(() => {
         setLoding(false);

@@ -9,7 +9,7 @@ export async function GET(req: NextRequest, context: Context) {
   const { title } = context.params;
 
   if (!title) {
-    return NextResponse.json("잘못된 요청입니다", { status: 400 });
+    return new Response("잘못된 요청입니다", { status: 400 });
   }
 
   const article = await getArticle(title);
@@ -17,6 +17,6 @@ export async function GET(req: NextRequest, context: Context) {
     .map(({ title }) => title)
     .sort((a, b) => b.length - a.length);
 
-  if (!article) return NextResponse.json("찾을 수 없는 위키", { status: 404 });
+  if (!article) return new Response("찾을 수 없는 위키", { status: 404 });
   return NextResponse.json({ article, allArticles }, { status: 200 });
 }
