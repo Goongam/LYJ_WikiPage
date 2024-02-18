@@ -1,6 +1,11 @@
 import { SimpleArticle } from "@/types/article";
 import { useEffect, useState } from "react";
 
+/**
+ * 해당 titled의 위키문서를 가져오는 커스텀 훅
+ * @param title
+ * @returns 위키 제목, 내용
+ */
 export function useArticle(title: string) {
   const [article, setArticle] = useState<SimpleArticle>();
   const [allTitles, setAllTitle] = useState<string[]>([]);

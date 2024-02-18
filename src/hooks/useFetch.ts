@@ -5,7 +5,7 @@ import { useState } from "react";
 /**
  * 위키 글 추가, 수정을 위한 mutate 및 에러, 로딩 상태를 제공하는 커스텀 훅
  * @param fetchFn
- * @param param1
+ * @param onSuccess - fetch 성공 시 실행할 콜백함수
  *
  */
 export function useMutate(

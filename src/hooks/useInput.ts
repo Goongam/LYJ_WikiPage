@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 
 /**
  * 글 추가, 수정 시 input의 값과 에러 상태를 관리하기 위한 훅
- * @param initValue
+ * @param initValue 기본값
  *
  */
 export function useInput(initValue: string) {
